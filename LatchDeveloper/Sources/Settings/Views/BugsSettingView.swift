@@ -57,7 +57,7 @@ struct BugsSettingsView: View {
                         .fontWeight(.regular)
                         .multilineTextAlignment(.center)
                 }
-            }   
+            }
             
             Spacer()
         }
