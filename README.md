@@ -4,7 +4,7 @@ Desktop application that makes use of [latch-sdk-swift](https://raw.githubuserco
 
 # Getting startd
 
-1. Install Xcode beta 6 or later
+1. Install Xcode 15 beta 6 or later
 1. Clone this repository and open the project
 1. Wait for SPM to download dependencies and hit play
 
