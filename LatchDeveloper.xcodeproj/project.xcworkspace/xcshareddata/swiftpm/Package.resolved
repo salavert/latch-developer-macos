@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/salavert/latch-sdk-swift",
       "state" : {
-        "revision" : "64a00321b78afad947e06054721f566090e5ff2c",
-        "version" : "0.1.0"
+        "revision" : "f765287ca8359e4b42faeb848d2985e445352dcf",
+        "version" : "0.2.0"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-composable-architecture/",
       "state" : {
-        "revision" : "195284b94b799b326729640453f547f08892293a",
-        "version" : "1.0.0"
+        "revision" : "a7c1f799b55ecb418f85094b142565834f7ee7c7",
+        "version" : "1.2.0"
       }
     },
     {

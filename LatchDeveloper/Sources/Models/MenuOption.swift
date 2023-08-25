@@ -129,3 +129,10 @@ public enum StatusSubMenu: String, Equatable, Sendable, CaseIterable, Identifiab
         }
     }
 }
+
+public enum PairAccountSubMenu: String, Equatable, Sendable, CaseIterable, Identifiable  {
+    case pairWithToken = "With Token"
+    case pairWithId = "With Id"
+    
+    public var id: String { rawValue }
+}

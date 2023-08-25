@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB1AB8032A98957700D7282F /* PairAccountWithToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1AB8022A98957700D7282F /* PairAccountWithToken.swift */; };
+		BB1AB8052A9896A900D7282F /* PairAccountWithId.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1AB8042A9896A900D7282F /* PairAccountWithId.swift */; };
 		BB1C179A2A8E3EDC00FDB481 /* CheckStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C17992A8E3EDC00FDB481 /* CheckStatusView.swift */; };
 		BB336EA32A93B32C00FCB5F2 /* LogTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB336EA22A93B32C00FCB5F2 /* LogTab.swift */; };
 		BB363B722A901438006FEBD9 /* RepositoryClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB363B712A901438006FEBD9 /* RepositoryClient.swift */; };
@@ -62,6 +64,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB1AB8022A98957700D7282F /* PairAccountWithToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairAccountWithToken.swift; sourceTree = "<group>"; };
+		BB1AB8042A9896A900D7282F /* PairAccountWithId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairAccountWithId.swift; sourceTree = "<group>"; };
 		BB1C17992A8E3EDC00FDB481 /* CheckStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckStatusView.swift; sourceTree = "<group>"; };
 		BB336EA22A93B32C00FCB5F2 /* LogTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTab.swift; sourceTree = "<group>"; };
 		BB363B712A901438006FEBD9 /* RepositoryClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryClient.swift; sourceTree = "<group>"; };
@@ -259,6 +263,8 @@
 				BB784BA02A8F4E2700D3B3E7 /* OperationsView.swift */,
 				BB784BA22A8F592400D3B3E7 /* StatusView.swift */,
 				BB784BA42A8F742C00D3B3E7 /* UserHistoryView.swift */,
+				BB1AB8022A98957700D7282F /* PairAccountWithToken.swift */,
+				BB1AB8042A9896A900D7282F /* PairAccountWithId.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -452,11 +458,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBCA70242A862957008CB544 /* LatchDeveloperApp.swift in Sources */,
+				BB1AB8032A98957700D7282F /* PairAccountWithToken.swift in Sources */,
 				BB8C42B12A8C213D008B33B0 /* View+Utils.swift in Sources */,
 				BB784BA32A8F592400D3B3E7 /* StatusView.swift in Sources */,
 				BB8C42B32A8C21E7008B33B0 /* ApplicationConstants.swift in Sources */,
 				BB8C42AE2A8C202D008B33B0 /* LogCategory.swift in Sources */,
 				BB8C42C42A8CEC3D008B33B0 /* PairAccountView.swift in Sources */,
+				BB1AB8052A9896A900D7282F /* PairAccountWithId.swift in Sources */,
 				BB8C42AF2A8C202D008B33B0 /* LogMessage.swift in Sources */,
 				BB8C42CB2A8CF483008B33B0 /* Dictionnary+Utils.swift in Sources */,
 				BBCA70362A86827A008CB544 /* AppView.swift in Sources */,
@@ -559,7 +567,7 @@
 			repositoryURL = "https://github.com/salavert/latch-sdk-swift";
 			requirement = {
 				kind = exactVersion;
-				version = 0.1.0;
+				version = 0.2.0;
 			};
 		};
 		BBCA70322A8629AA008CB544 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
@@ -567,7 +575,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture/";
 			requirement = {
 				kind = exactVersion;
-				version = 1.0.0;
+				version = 1.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

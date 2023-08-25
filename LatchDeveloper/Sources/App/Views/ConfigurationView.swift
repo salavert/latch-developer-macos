@@ -75,9 +75,6 @@ public struct ConfigurationReducer: Reducer {
 }
 
 struct ConfigurationView: View {
-    @Environment(\.openWindow) private var openWindow
-    @Environment(\.dismiss) private var dismiss
-
     @State var appId = ""
     @State var appSecret = ""
     @State var host = ""
@@ -117,11 +114,7 @@ struct ConfigurationView: View {
             TextField("User Secret", text: viewStore.$userSecret)
                 .textFieldConfigStyle()
             
-            Button(action: {
-//                dismiss()
-                viewStore.send(.configure)
-//                openWindow(id: "home")
-            }, label: {
+            Button(action: { viewStore.send(.configure) }, label: {
                 HStack {
                     Spacer()
                     Text("Configure")

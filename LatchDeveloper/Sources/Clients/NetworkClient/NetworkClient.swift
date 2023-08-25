@@ -11,6 +11,7 @@ public struct NetworkClient {
     public var lock: @Sendable (String, String) async throws -> LatchResponse
     public var operationStatus: @Sendable (String, String, Bool, Bool) async throws -> LatchResponse
     public var pair: @Sendable (String) async throws -> LatchResponse
+    public var pairWithId: @Sendable (String) async throws -> LatchResponse
     public var subscription: @Sendable () async throws -> LatchResponse
     public var unlock: @Sendable (String, String) async throws -> LatchResponse
     public var unpair: @Sendable (String) async throws -> LatchResponse
@@ -74,6 +75,9 @@ extension NetworkClient: DependencyKey {
             },
             pair: { token in
                 try await latchSDK.pair(token: token)
+            },
+            pairWithId: { id in
+                try await latchSDK.pairWithId(id)
             },
             subscription: {
                 try await latchSDK.subscription()

@@ -2,9 +2,6 @@ import ComposableArchitecture
 import SwiftUI
 
 struct NavigationView: View {
-    @Environment(\.openWindow) private var openWindow
-    @Environment(\.dismiss) private var dismiss
-    
     let store: StoreOf<AppReducer>
     @ObservedObject var viewStore: ViewStore<AppReducer.State, AppReducer.Action>
 
@@ -35,10 +32,7 @@ struct NavigationView: View {
         } detail: {
            switch viewStore.$selectedMenuOption.wrappedValue {
             case .pair:
-               IfLetStore(
-                   store.scope(state: \.pairAccount, action: AppReducer.Action.pairAccount),
-                   then: PairAccountView.init
-               )
+               PairAccountView(store: store)
             case .unpair:
                IfLetStore(
                    store.scope(state: \.unpairAccount, action: AppReducer.Action.unpairAccount),

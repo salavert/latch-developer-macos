@@ -8,7 +8,8 @@ struct AppReducer: Reducer {
     @Dependency(\.repositoryClient) var repositoryClient
     
     public struct State: Equatable {
-        var pairAccount: PairAccountReducer.State?
+        var pairAccountWithId: PairAccountWithIdReducer.State?
+        var pairAccountWithToken: PairAccountWithTokenReducer.State?
         var unpairAccount: UnpairAccountReducer.State?
         var checkStatus: CheckStatusReducer.State?
         var modifyStatus: ModifyStatusReducer.State?
@@ -28,7 +29,8 @@ struct AppReducer: Reducer {
         @BindingState var selectedSettingsTab: SettingsTab
         
         public init(
-            pairAccount: PairAccountReducer.State? = .init(),
+            pairAccountWithId: PairAccountWithIdReducer.State? = .init(),
+            pairAccountWithToken: PairAccountWithTokenReducer.State? = .init(),
             unpairAccount: UnpairAccountReducer.State? = .init(),
             checkStatus: CheckStatusReducer.State? = .init(),
             modifyStatus: ModifyStatusReducer.State? = .init(),
@@ -46,7 +48,8 @@ struct AppReducer: Reducer {
             currentClientVersions: [GetUserHistoryResponse.ClientVersion] = [],
             selectedSettingsTab: SettingsTab = .general
         ) {
-            self.pairAccount = pairAccount
+            self.pairAccountWithId = pairAccountWithId
+            self.pairAccountWithToken = pairAccountWithToken
             self.unpairAccount = unpairAccount
             self.checkStatus = checkStatus
             self.modifyStatus = modifyStatus
@@ -83,7 +86,8 @@ struct AppReducer: Reducer {
         case modifyStatus(ModifyStatusReducer.Action)
         case presentBugs
         case presentConfiguration
-        case pairAccount(PairAccountReducer.Action)
+        case pairAccountWithId(PairAccountWithIdReducer.Action)
+        case pairAccountWithToken(PairAccountWithTokenReducer.Action)
         case presentResponseLog(ResponseLog)
         case saveOperations([String: GetApplicationsResponse.Operation]?)
         case saveResponseLog(LatchResponse)
@@ -100,8 +104,11 @@ struct AppReducer: Reducer {
     public var body: some Reducer<State, Action> {
         BindingReducer()
         self.core
-            .ifLet(\.pairAccount, action: /Action.pairAccount) {
-                PairAccountReducer()
+            .ifLet(\.pairAccountWithId, action: /Action.pairAccountWithId) {
+                PairAccountWithIdReducer()
+            }
+            .ifLet(\.pairAccountWithToken, action: /Action.pairAccountWithToken) {
+                PairAccountWithTokenReducer()
             }
             .ifLet(\.unpairAccount, action: /Action.unpairAccount) {
                 UnpairAccountReducer()
@@ -163,7 +170,8 @@ struct AppReducer: Reducer {
                 return .none
                 
             case let .saveResponseLog(latchResponse),
-                let .pairAccount(.delegate(.saveResponseLog(latchResponse))),
+                let .pairAccountWithId(.delegate(.saveResponseLog(latchResponse))),
+                let .pairAccountWithToken(.delegate(.saveResponseLog(latchResponse))),
                 let .unpairAccount(.delegate(.saveResponseLog(latchResponse))),
                 let .checkStatus(.delegate(.saveResponseLog(latchResponse))),
                 let .modifyStatus(.delegate(.saveResponseLog(latchResponse))),
@@ -203,7 +211,10 @@ struct AppReducer: Reducer {
             case .binding:
                 return .none
                 
-            case .pairAccount:
+            case .pairAccountWithId:
+                return .none
+                
+            case .pairAccountWithToken:
                 return .none
                 
             case .checkStatus:
