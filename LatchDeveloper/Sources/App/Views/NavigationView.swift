@@ -2,6 +2,8 @@ import ComposableArchitecture
 import SwiftUI
 
 struct NavigationView: View {
+    @Environment(\.openURL) private var openURL
+
     let store: StoreOf<AppReducer>
     @ObservedObject var viewStore: ViewStore<AppReducer.State, AppReducer.Action>
 
@@ -27,6 +29,14 @@ struct NavigationView: View {
             
             Text("Beta version \(ApplicationConstants.appVersion) (\(ApplicationConstants.buildNumber))")
                 .footnoteStyle()
+            
+            if let newVersionTag = viewStore.newVersionTag {
+                Button(action: { openURL(ApplicationConstants.appCenterPublicGroupURL) }) {
+                    Text("New version **\(newVersionTag)** available")
+                        .featuredStyle()
+                }
+                .help("Click to download new version")
+            }
             
             Spacer()
         } detail: {

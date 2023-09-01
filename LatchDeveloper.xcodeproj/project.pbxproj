@@ -58,6 +58,8 @@
 		BBCA70362A86827A008CB544 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCA70352A86827A008CB544 /* AppView.swift */; };
 		BBCA703B2A8686F7008CB544 /* LatchSDK in Frameworks */ = {isa = PBXBuildFile; productRef = BBCA703A2A8686F7008CB544 /* LatchSDK */; };
 		BBCA70472A869373008CB544 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCA70462A869373008CB544 /* NetworkClient.swift */; };
+		BBD71D362AA204CC00EFA494 /* GitHubRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD71D352AA204CC00EFA494 /* GitHubRelease.swift */; };
+		BBD71D392AA20BB500EFA494 /* GitHubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD71D382AA20BB500EFA494 /* GitHubClient.swift */; };
 		BBEF78D52A910EA800A68261 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEF78D42A910EA800A68261 /* SettingsView.swift */; };
 		BBEF78D82A91199C00A68261 /* DeveloperSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEF78D72A91199C00A68261 /* DeveloperSettingsView.swift */; };
 		BBF8265B2A90A47C0081D8A1 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF8265A2A90A47C0081D8A1 /* GeneralSettingsView.swift */; };
@@ -116,6 +118,8 @@
 		BBCA70432A868E6F008CB544 /* LatchDeveloper.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = LatchDeveloper.xcconfig; sourceTree = "<group>"; };
 		BBCA70462A869373008CB544 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		BBCA70482A869631008CB544 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBD71D352AA204CC00EFA494 /* GitHubRelease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRelease.swift; sourceTree = "<group>"; };
+		BBD71D382AA20BB500EFA494 /* GitHubClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubClient.swift; sourceTree = "<group>"; };
 		BBEF78D42A910EA800A68261 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BBEF78D72A91199C00A68261 /* DeveloperSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperSettingsView.swift; sourceTree = "<group>"; };
 		BBF8265A2A90A47C0081D8A1 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 				BB8C42BB2A8CAEEA008B33B0 /* MenuOption.swift */,
 				BB8C42CE2A8DF162008B33B0 /* ResponseLog.swift */,
 				BB336EA22A93B32C00FCB5F2 /* LogTab.swift */,
+				BBD71D352AA204CC00EFA494 /* GitHubRelease.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 		BB8C42B52A8C24D8008B33B0 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				BBD71D372AA20BA700EFA494 /* GitHubClient */,
 				BB363B732A901449006FEBD9 /* RepositoryClient */,
 				BB8C42A32A8C202D008B33B0 /* Logger */,
 				BBCA70452A869362008CB544 /* NetworkClient */,
@@ -353,6 +359,14 @@
 				BBCA70462A869373008CB544 /* NetworkClient.swift */,
 			);
 			path = NetworkClient;
+			sourceTree = "<group>";
+		};
+		BBD71D372AA20BA700EFA494 /* GitHubClient */ = {
+			isa = PBXGroup;
+			children = (
+				BBD71D382AA20BB500EFA494 /* GitHubClient.swift */,
+			);
+			path = GitHubClient;
 			sourceTree = "<group>";
 		};
 		BBEF78D62A910EC500A68261 /* Views */ = {
@@ -491,9 +505,11 @@
 				BB336EA32A93B32C00FCB5F2 /* LogTab.swift in Sources */,
 				BB784B882A8E679100D3B3E7 /* AddOperationView.swift in Sources */,
 				BB8C42BA2A8CA066008B33B0 /* HomeView.swift in Sources */,
+				BBD71D362AA204CC00EFA494 /* GitHubRelease.swift in Sources */,
 				BBCA70472A869373008CB544 /* NetworkClient.swift in Sources */,
 				BB784BA52A8F742C00D3B3E7 /* UserHistoryView.swift in Sources */,
 				BB8C42B82A8C2FB8008B33B0 /* ApplicationConfig.swift in Sources */,
+				BBD71D392AA20BB500EFA494 /* GitHubClient.swift in Sources */,
 				BB8C42BC2A8CAEEA008B33B0 /* MenuOption.swift in Sources */,
 				BB8C42AC2A8C202D008B33B0 /* SystemLogger.swift in Sources */,
 				BB784B862A8E5BD200D3B3E7 /* ModifyStatusView.swift in Sources */,

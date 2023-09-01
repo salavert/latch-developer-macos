@@ -6,6 +6,7 @@ import SwiftUI
 struct AppReducer: Reducer {
     @Dependency(\.networkClient) var networkClient
     @Dependency(\.repositoryClient) var repositoryClient
+    @Dependency(\.gitHubClient) var gitHubClient
     
     public struct State: Equatable {
         var pairAccountWithId: PairAccountWithIdReducer.State?
@@ -23,6 +24,7 @@ struct AppReducer: Reducer {
         var presentedResponseLog: ResponseLog?
         var currentHistory: [GetUserHistoryResponse.History]
         var currentClientVersions: [GetUserHistoryResponse.ClientVersion]
+        var newVersionTag: String?
         
         @BindingState var selectedMenuOption: MenuOption
         @BindingState var selectedResponseLogTab: LogTab
@@ -46,7 +48,8 @@ struct AppReducer: Reducer {
             presentedResponseLog: ResponseLog? = nil,
             currentHistory: [GetUserHistoryResponse.History] = [],
             currentClientVersions: [GetUserHistoryResponse.ClientVersion] = [],
-            selectedSettingsTab: SettingsTab = .general
+            selectedSettingsTab: SettingsTab = .general,
+            newVersionTag: String? = nil
         ) {
             self.pairAccountWithId = pairAccountWithId
             self.pairAccountWithToken = pairAccountWithToken
@@ -66,6 +69,7 @@ struct AppReducer: Reducer {
             self.currentHistory = currentHistory
             self.currentClientVersions = currentClientVersions
             self.selectedSettingsTab = selectedSettingsTab
+            self.newVersionTag = newVersionTag
         }
         
         var isCopyToClipboardDisabled: Bool {
@@ -83,6 +87,7 @@ struct AppReducer: Reducer {
         case deleteOperation(DeleteOperationReducer.Action)
         case didFinishLaunching
         case generalSettingsChanged
+        case getLatestReleaseTag(TaskResult<String?>)
         case modifyStatus(ModifyStatusReducer.Action)
         case presentBugs
         case presentConfiguration
@@ -144,7 +149,14 @@ struct AppReducer: Reducer {
                     .generalSettingsChanged:
                 if let applicationConfig = repositoryClient.getApplicationConfig(), applicationConfig.isValid {
                     Log.debug(.app, applicationConfig.description)
-                    return configure(applicationConfig, state: &state)
+                    return .concatenate(
+                        configure(applicationConfig, state: &state),
+                        .run { send in
+                            await send(.getLatestReleaseTag(
+                                TaskResult { try await gitHubClient.getLatestReleaseTag() }
+                            ))
+                        }
+                    )
                 } else {
                     state.step = .onboarding
                     return .none
@@ -206,6 +218,20 @@ struct AppReducer: Reducer {
               
             case let .saveOperations(operations):
                 saveAllOperationsOfCurrentApp(operations, state: &state)
+                return .none
+                
+            case let .getLatestReleaseTag(.success(newVersionTag)):
+                guard let newVersionTag,
+                        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else {
+                    return .none
+                }
+                if newVersionTag > appVersion {
+                    Log.debug(.app, "Found new version tag \(newVersionTag). Current version is \(appVersion)")
+                    state.newVersionTag = newVersionTag
+                }
+                return .none
+
+            case .getLatestReleaseTag(.failure):
                 return .none
                 
             case .binding:

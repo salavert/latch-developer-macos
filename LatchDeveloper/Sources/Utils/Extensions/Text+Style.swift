@@ -30,4 +30,11 @@ extension Text {
             .fontWeight(.ultraLight)
             .multilineTextAlignment(.center)
     }
+    
+    public func featuredStyle() -> some View {
+        font(.footnote)
+            .fontWeight(.regular)
+            .foregroundStyle(.orange)
+            .multilineTextAlignment(.center)
+    }
 }
