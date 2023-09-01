@@ -528,6 +528,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BBCA70432A868E6F008CB544 /* LatchDeveloper.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				DEVELOPMENT_TEAM = E3WR764V5V;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MARKETING_VERSION = 0.2.0;
 			};
 			name = Debug;
 		};
@@ -535,6 +539,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BBCA70432A868E6F008CB544 /* LatchDeveloper.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				DEVELOPMENT_TEAM = E3WR764V5V;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MARKETING_VERSION = 0.2.0;
 			};
 			name = Release;
 		};
