@@ -1,4 +1,3 @@
-import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -68,7 +67,6 @@ public struct DeleteOperationReducer: Reducer {
                 return .none
             
             case .deleteOperation:
-                Analytics.trackEvent(Events.deleteOperation)
                 state.isDeletingOperation = true
                 return .run { [operationId = state.operationId] send in
                     let latchResponse = try await networkClient.deleteOperation(operationId)

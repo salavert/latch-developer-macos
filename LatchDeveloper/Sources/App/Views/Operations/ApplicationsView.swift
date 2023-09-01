@@ -1,4 +1,3 @@
-import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -74,7 +73,6 @@ public struct ApplicationsReducer: Reducer {
                 return .none
                 
             case let .configure(appId, appSecret):
-                Analytics.trackEvent(Events.switchToApplication)
                 state.appId = appId
                 let applicationConfig = repositoryClient.getApplicationConfig()
                 return .send(.delegate(.configure(.init(
@@ -115,7 +113,6 @@ struct ApplicationsView: View {
             
             Button(
                 action: {
-                    Analytics.trackEvent(Events.getApplicationsList)
                     viewStore.send(.applications)
                 },
                 label: {

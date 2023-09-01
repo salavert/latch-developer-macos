@@ -1,4 +1,3 @@
-import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -46,7 +45,6 @@ struct LogsView: View {
                         Spacer()
                         Button(
                             action: {
-                                Analytics.trackEvent(Events.showPreviousLog)
                                 viewStore.send(.presentResponseLog(log))
                             },
                             label: {

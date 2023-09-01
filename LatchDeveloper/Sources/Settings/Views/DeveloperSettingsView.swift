@@ -1,4 +1,3 @@
-import AppCenterAnalytics
 import ComposableArchitecture
 import SwiftUI
 
@@ -25,7 +24,6 @@ struct DeveloperSettingsView: View {
                 .multilineTextAlignment(.center)
 
             Button("Delete") {
-                Analytics.trackEvent(Events.clearAllData)
                 repositoryClient.clearAll()
             }
             .buttonCustomStle()

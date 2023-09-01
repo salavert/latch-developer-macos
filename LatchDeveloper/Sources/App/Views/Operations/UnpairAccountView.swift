@@ -1,4 +1,3 @@
-import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -61,10 +60,8 @@ public struct UnpairAccountReducer: Reducer {
                 state.isUnpairingToken = true
                 var accountId: String
                 if !state.selectedAccountId.isEmpty {
-                    Analytics.trackEvent(Events.unpair)
                     accountId = state.selectedAccountId
                 } else {
-                    Analytics.trackEvent(Events.unpairManual)
                     accountId = state.manualAccountId
                 }
                 return .run { [accountId = accountId] send in
