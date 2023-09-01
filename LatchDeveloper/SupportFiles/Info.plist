@@ -26,5 +26,14 @@
 	<string>Light</string>
 	<key>build_type</key>
 	<string>$(CONFIGURATION)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>appcenter-a0cc41e8-af70-4f5d-9a11-5e96a335bb1e</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
