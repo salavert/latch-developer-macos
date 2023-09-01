@@ -27,6 +27,16 @@ extension ResponseLog {
         }
     }
     
+    public var responseBodyErrorMessage: String? {
+        if let dictionary = try? JSONSerialization.jsonObject(with: response.rawData, options: []) as? [String: Any],
+            let error = dictionary["error"] as? [String: Any],
+            let message = error["message"] as? String {
+            return message
+        } else {
+            return nil
+        }
+    }
+    
     public var requestDescription: String {
         var output = ""
         if let httpMethod = response.request.httpMethod,  let url = response.request.url {

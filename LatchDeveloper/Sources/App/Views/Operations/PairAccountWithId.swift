@@ -1,3 +1,4 @@
+import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -39,6 +40,7 @@ public struct PairAccountWithIdReducer: Reducer {
         Reduce<State, Action> { state, action in
             switch action {
             case .pair:
+                Analytics.trackEvent(Events.pairWithToken)
                 state.isPairingId = true
                 return .run { [id = state.$id.wrappedValue] send in
                     let latchResponse = try await networkClient.pairWithId(id)

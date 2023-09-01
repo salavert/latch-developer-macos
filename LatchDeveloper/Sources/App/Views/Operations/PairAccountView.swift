@@ -4,7 +4,7 @@ import SwiftUI
 struct PairAccountView: View {
     let store: StoreOf<AppReducer>
     @ObservedObject var viewStore: ViewStore<AppReducer.State, AppReducer.Action>
-    @State var activeSubMenu: PairAccountSubMenu = .pairWithId
+    @State var activeSubMenu: PairAccountSubMenu = .pairWithToken
 
     init(store: StoreOf<AppReducer>) {
         self.store = store

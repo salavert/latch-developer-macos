@@ -1,3 +1,4 @@
+import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -66,6 +67,7 @@ public struct UserHistoryReducer: Reducer {
                 return .none
                 
             case .userHistory:
+                Analytics.trackEvent(Events.getUserHistory)
                 state.isGettingUserHistory = true
                 return .run { [accountId = state.accountId] send in
                     let latchResponse = try await networkClient.history(accountId)

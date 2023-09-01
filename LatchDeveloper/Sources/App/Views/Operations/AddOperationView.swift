@@ -1,3 +1,4 @@
+import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -70,6 +71,7 @@ public struct AddOperationReducer: Reducer {
                 return .none
             
             case .addOperation:
+                Analytics.trackEvent(Events.addOperation)
                 state.isAddingOperation = true
                 return .run { [
                     parentId = state.parentId,

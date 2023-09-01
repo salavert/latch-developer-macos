@@ -1,3 +1,4 @@
+import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -58,6 +59,7 @@ public struct ModifyStatusReducer: Reducer {
                 return .none
                 
             case .modifyStatus:
+                Analytics.trackEvent(Events.modifyStatus)
                 state.isModifyingStatus = true
                 var accountId: String
                 if !state.selectedAccountId.isEmpty {

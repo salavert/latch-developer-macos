@@ -1,3 +1,4 @@
+import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -37,6 +38,7 @@ public struct SubscriptionReducer: Reducer {
         Reduce<State, Action> { state, action in
             switch action {
             case .subscription:
+                Analytics.trackEvent(Events.getSubscription)
                 state.isGettingSubscription = true
                 return .run { send in
                     let latchResponse = try await networkClient.subscription()

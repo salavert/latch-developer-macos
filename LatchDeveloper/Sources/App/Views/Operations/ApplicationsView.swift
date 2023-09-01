@@ -1,3 +1,4 @@
+import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -73,6 +74,7 @@ public struct ApplicationsReducer: Reducer {
                 return .none
                 
             case let .configure(appId, appSecret):
+                Analytics.trackEvent(Events.switchToApplication)
                 state.appId = appId
                 let applicationConfig = repositoryClient.getApplicationConfig()
                 return .send(.delegate(.configure(.init(
@@ -111,20 +113,26 @@ struct ApplicationsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             
-            Button(action: { viewStore.send(.applications) }, label: {
-                HStack {
-                    Spacer()
-                    if viewStore.isGettingApplications {
-                        ProgressView()
-                            .controlSize(.small)
-                    } else {
-                        Text("Reload applications")
+            Button(
+                action: {
+                    Analytics.trackEvent(Events.getApplicationsList)
+                    viewStore.send(.applications)
+                },
+                label: {
+                    HStack {
+                        Spacer()
+                        if viewStore.isGettingApplications {
+                            ProgressView()
+                                .controlSize(.small)
+                        } else {
+                            Text("Reload applications")
+                        }
+                        Spacer()
+                        Image(systemName: "arrow.counterclockwise")
                     }
-                    Spacer()
-                    Image(systemName: "arrow.counterclockwise")
+                    .contentShape(Rectangle())
                 }
-                .contentShape(Rectangle())
-            })
+            )
             .buttonCustomStle()
             .padding(.top, 10)
             .disabled(viewStore.isSubmitButtonDisabled)

@@ -1,3 +1,4 @@
+import AppCenterAnalytics
 import AppKit
 import ComposableArchitecture
 import LatchSharedModels
@@ -153,18 +154,25 @@ struct AppReducer: Reducer {
             case let .configure(applicationConfig),
                 let .applications(.delegate(.configure(applicationConfig))):
                 if applicationConfig.isValid {
+                    Analytics.trackEvent(Events.updateConfig)
+                    if applicationConfig.host != ApplicationConstants.defaultHost {
+                        Analytics.trackEvent(Events.configuredNonProductionHost)
+                    }
                     return configure(applicationConfig, state: &state)
                 } else {
+                    Analytics.trackEvent(Events.redirectingToOnboarding)
                     state.step = .onboarding
                     return .none
                 }
                 
             case .presentBugs:
+                Analytics.trackEvent(Events.showingBugsSetting)
                 state.selectedSettingsTab = .bugs
                 NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
                 return .none
                 
             case .presentConfiguration:
+                Analytics.trackEvent(Events.showingConfigSetting)
                 state.selectedSettingsTab = .general
                 NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
                 return .none
@@ -186,6 +194,18 @@ struct AppReducer: Reducer {
                 )
                 state.responseLogs.append(log)
                 state.presentedResponseLog = log
+                if let statusCode = log.responseStatusCode, statusCode != 200 {
+                    Analytics.trackEvent(Events.responseInvalidStatusCode, withProperties: [
+                        "StatusCode": String(statusCode)
+                    ])
+                } else if let code = log.responseBodyStatusCode, let message = log.responseBodyErrorMessage {
+                    Analytics.trackEvent(Events.responseInvalidErrorCode, withProperties: [
+                        "Code": String(code),
+                        "Message": message
+                    ])
+                } else {
+                    Analytics.trackEvent(Events.responseSuccess)
+                }
                 return .none
                 
             case let .presentResponseLog(responseLog):
@@ -197,8 +217,10 @@ struct AppReducer: Reducer {
                     NSPasteboard.general.clearContents()
                     switch state.selectedResponseLogTab {
                     case .request:
+                        Analytics.trackEvent(Events.copyRequestToClipboard)
                         NSPasteboard.general.setString(log.requestDescription, forType: .string)
                     case .response:
+                        Analytics.trackEvent(Events.copyResponseToClipboard)
                         NSPasteboard.general.setString(log.responseDescription, forType: .string)
                     }
                 }

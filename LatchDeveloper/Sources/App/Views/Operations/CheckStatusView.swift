@@ -1,3 +1,4 @@
+import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -63,8 +64,10 @@ public struct CheckStatusReducer: Reducer {
                 state.isCheckingStatus = true
                 var accountId: String
                 if !state.selectedAccountId.isEmpty {
+                    Analytics.trackEvent(Events.checkStatus)
                     accountId = state.selectedAccountId
                 } else {
+                    Analytics.trackEvent(Events.checkStatusManual)
                     accountId = state.manualAccountId
                 }
                 return .run { [

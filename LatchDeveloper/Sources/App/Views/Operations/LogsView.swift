@@ -1,3 +1,4 @@
+import AppCenterAnalytics
 import ComposableArchitecture
 import LatchSharedModels
 import SwiftUI
@@ -43,13 +44,19 @@ struct LogsView: View {
                             }
                         }
                         Spacer()
-                        Button(action: { viewStore.send(.presentResponseLog(log)) }, label: {
-                            HStack {
-                                Text("Show")
-                                Image(systemName: "arrow.right")
+                        Button(
+                            action: {
+                                Analytics.trackEvent(Events.showPreviousLog)
+                                viewStore.send(.presentResponseLog(log))
+                            },
+                            label: {
+                                HStack {
+                                    Text("Show")
+                                    Image(systemName: "arrow.right")
+                                }
+                                .contentShape(Rectangle())
                             }
-                            .contentShape(Rectangle())
-                        })
+                        )
                         .buttonCustomStle()
                     }
                 }
